@@ -1,0 +1,34 @@
+SELECT * 
+FROM fortune_companies;
+
+SELECT company_name,industry,
+CASE WHEN paid_time_off_days>=24 THEN "great"
+WHEN paid_time_off_days >= 18 THEN "good"
+WHEN paid_time_off_days >=14 THEN "ok"
+ELSE "bad" 
+END AS "pto_days"
+FROM fortune_companies
+GROUP BY company_name;
+
+
+SELECT industry, company_name,
+ROUND(avg_employee_tenure) 
+as avg_tenure
+FROM fortune_companies
+GROUP BY industry
+HAVING avg_tenure>=5;
+
+
+SELECT company_name
+FROM fortune_companies
+WHERE maternity_leave_weeks>8
+AND healthcare_benefits=1;
+
+SELECT company_name
+FROM fortune_companies
+WHERE paid_time_off_days>20
+AND healthcare_benefits=1;
+
+SELECT company_name,industry,SUM(revenue)
+FROM fortune_companies
+WHERE industry = "Technology";
